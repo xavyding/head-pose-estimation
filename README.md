@@ -17,17 +17,17 @@ There are 3 major steps:
 This implementation is inspired from yinguobing's python implementation. (https://github.com/yinguobing/head-pose-estimation)
 
 
-## how to run
+## How to run
 You'll need to have OpenCV pre-installed in order to compile this project.
 
-clone the repo and get download the models
+clone the repo and download the models
 ```bash
 git clone https://github.com/xavyding/head-pose-estimation.git
 cd head-pose-estimation
 git lfs pull
 ```
 
-build the repo
+build the project
 ```bash
 mkdir build
 cd build
