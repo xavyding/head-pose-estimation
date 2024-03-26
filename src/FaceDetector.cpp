@@ -9,9 +9,9 @@
 #include "opencv2/videoio/legacy/constants_c.h"
 #include "opencv2/highgui/highgui_c.h"
 
-FaceDetector::FaceDetector(const std::string &dlibPath) {
+FaceDetector::FaceDetector(const std::string &shapePredictorPath) {
     _faceDetector = dlib::get_frontal_face_detector();
-    dlib::deserialize(dlibPath) >> _landmarksDetector;
+    dlib::deserialize(shapePredictorPath) >> _landmarksDetector;
 }
 
 dlib::array2d<dlib::rgb_pixel> FaceDetector::preprocessImage(const cv::Mat &frame) {
