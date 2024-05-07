@@ -30,6 +30,19 @@ void PoseEstimator::solvePnP(const std::vector<cv::Point> &landmarkPoints, cv::M
     cv::solvePnP(_refLandmarks3D, landmarks, _cameraMatrix, _distCoeffs, rvec, tvec);
 }
 
+cv::Vec3d PoseEstimator::computeEulerAngles(const cv::Mat &rvec, const cv::Mat &tvec) {
+    cv::Mat rmat;
+    cv::Rodrigues(rvec, rmat);
+    cv::Mat projectionMat;
+    cv::hconcat(rmat, tvec, projectionMat);
+    cv::Mat c, r, t, euler;
+    cv::decomposeProjectionMatrix(projectionMat, c, r, t, cv::noArray(), cv::noArray(), cv::noArray(), euler);
+    double pitch = euler.at<double>(0);
+    double yaw = euler.at<double>(1);
+    double roll = euler.at<double>(2);
+    return cv::Vec3d(pitch, yaw, roll);  // in degree
+}
+
 void PoseEstimator::showPose(const cv::Mat &frame, const cv::Mat &rvec, const cv::Mat &tvec) {
     cv::Mat image = frame.clone();
     std::vector<cv::Point3d> points3d;

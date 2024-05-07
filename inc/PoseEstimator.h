@@ -13,6 +13,7 @@ class PoseEstimator {
     explicit PoseEstimator(const std::string &refLandmarksPath, const cv::Size &imageSize);
     void solvePnP(const std::vector<cv::Point> &landmarks, cv::Mat &rvec, cv::Mat &tvec);
     void showPose(const cv::Mat &frame, const cv::Mat &rvec, const cv::Mat &tvec);
+    cv::Vec3d computeEulerAngles(const cv::Mat &rvec, const cv::Mat &tvec);
  private:
     std::vector<cv::Point3d> _refLandmarks3D;
     cv::Mat _cameraMatrix;
